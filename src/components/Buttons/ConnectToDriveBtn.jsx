@@ -41,8 +41,8 @@ const ConnectToDriveBtn = () => {
   // }, [exchangeCode])
   
   const handleButtonClick = () => {
-    const clientId = '140717059895-8j0l40lgsr3t6g9trmra8flmtuviqrp5.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:3000';
+    const clientId = process.env.REACT_APP_CLIENT_ID;
+    const redirectUri =  process.env.NODE_ENV === 'development'? 'http://localhost:3000' : 'xyz';
     const scope = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly';
 
     
@@ -53,24 +53,6 @@ const ConnectToDriveBtn = () => {
     // Open the authorization URL in a new window
     window.location.href = authorizationUrl
     // const authWindow = window.open(authorizationUrl, '_blank', 'width=600,height=600');
-
-    // Listen for changes in the new window's location
-    // const checkForToken = () => {
-    //   const hash = authWindow.location.hash;
-    //   if (hash.includes('access_token')) {
-    //     const token = hash.match(/access_token=([^&]+)/)[1];
-    //     console.log(token);
-    //     setAccessToken(token);
-    //     localStorage.setItem('accessToken',accessToken)
-    //     authWindow.close();
-    //   } else {
-    //     setTimeout(checkForToken, 1000);
-    //   }
-    // };
-
-    // checkForToken();
-    // // Open a new window for the user to authorize the application
-    // const authWindow = window.open(authorizationUrl, '_blank');
 
     // Handle the redirect URL after authorization
     const handleRedirect = () => {
