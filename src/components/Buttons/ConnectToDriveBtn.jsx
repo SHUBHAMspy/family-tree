@@ -42,7 +42,7 @@ const ConnectToDriveBtn = () => {
   
   const handleButtonClick = () => {
     const clientId = process.env.REACT_APP_CLIENT_ID;
-    const redirectUri =  process.env.NODE_ENV === 'development'? 'http://localhost:3000' : 'xyz';
+    const redirectUri =  process.env.NODE_ENV === 'development'? 'http://localhost:3000' : REACT_APP_REDIRECT_URI;
     const scope = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly';
 
     
