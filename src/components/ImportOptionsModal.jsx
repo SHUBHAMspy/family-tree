@@ -16,7 +16,7 @@ const style={
 const ImportOptionsModal = ({setOpenModal,openModal}) => {
   const [isUploading, setIsUploading] = useState(false)
   const [data,setData] = useTreeState()
-  const [files,setFiles] = useState()
+  const [files,setFiles] = useState([])
 
   const inputRef = useRef(null)
   
@@ -62,9 +62,19 @@ const ImportOptionsModal = ({setOpenModal,openModal}) => {
       handleFileUpload(file)
     }
   }
-
+  const getToken = () => {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = hashParams.get('access_token');
+    console.log(accessToken);
+    if (accessToken) {
+      localStorage.setItem('accessToken',accessToken)
+      return accessToken
+    } else {
+      console.error('Error retrieving access token');
+    }
+  }
   const handleReadFile = async () => {
-    const accessToken = localStorage.getItem('accessToken')
+    const accessToken = getToken()
     const folderId = process.env.REACT_APP_FOLDER_ID
     const apiKey = process.env.REACT_APP_API_KEY
     console.log(accessToken);
